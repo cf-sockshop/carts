@@ -43,11 +43,9 @@ public class ItemsController {
     @RequestMapping(value = "/delay/{delay}", method = RequestMethod.GET)
     public void setDelayInMillis(@PathVariable("delay") Optional<String> delayInMillis) {
         String newDelay = "0";
-
         if (delayInMillis.isPresent()) {
             newDelay = delayInMillis.get();
         }
-
         this.delayInMillis = newDelay;
     }
 
@@ -60,14 +58,14 @@ public class ItemsController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public Item addToCart(@PathVariable String customerId, @RequestBody Item item) {
-        // If the item does not exist in the cart, create new one in the repository.
+        // If the item does not exist in the cart, create new one in the repository
         FoundItem foundItem = new FoundItem(() -> cartsController.get(customerId).contents(), () -> item);
 
         try {
             int millis = Integer.parseInt(delayInMillis);
             Thread.sleep(millis);
         } catch (Throwable e) {
-            // don't do anything
+            // don't do anything here
         }
 
         if (!foundItem.hasItem()) {
