@@ -65,7 +65,7 @@ public class ItemsController {
             int millis = Integer.parseInt(delayInMillis);
             Thread.sleep(millis);
         } catch (Throwable e) {
-            // don't do anything here
+            // don't do anything
         }
 
         if (!foundItem.hasItem()) {
